@@ -22,8 +22,8 @@ def home():
 def create_store():
     request_data = request.get_json()
     new_store = {
-        "name": request_data['name'],
-        "items": []
+        'name': request_data['name'],
+        'items': []
     }
     return jsonify(new_store)
 
@@ -40,24 +40,24 @@ def get_store(name):
 def get_stores():
     return jsonify({'stores': stores})
 
-@app.route('/store/<string:name>item', methods=['POST'])
+@app.route('/store/<string:name>/item', methods=['POST'])
 def create_item_in_store(name):
     request_data = request.get_json()
     for store in stores:
-        if store["name"] == name:
+        if store['name'] == name:
             new_item = {
-                "name": request_data["name"],
-                "price": request_data["price"]
+                'name': request_data['name'],
+                'price': request_data['price']
             }
             store['items'].append(new_item)
             return jsonify(store)
     return jsonify({"message": "Store not found"})
 
-@app.route('/store/<string:name>item')
+@app.route('/store/<string:name>/item')
 def get_item_in_store(name):
     for store in stores:
-        if store["name"] == name:
-            return jsonify(store["items"])
+        if store['name'] == name:
+            return jsonify(store['items'])
     return jsonify({"message": "Store not found"})
 
-app.run(debug=True, port=5000)
+app.run(debug=True port=5000)
